@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scrapbook Navii</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* fade-in untuk gambar */
+    .fade-in { opacity: 0; animation: fadeIn 1.5s forwards; }
+    @keyframes fadeIn { to { opacity: 1; } }
+
+    /* efek scrapbook */
+    .scrap-photo {
+      transform: rotate(-2deg);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+    .scrap-photo:nth-child(even) { transform: rotate(2deg); }
+    .scrap-photo:hover { transform: scale(1.05) rotate(0deg); z-index: 10; }
+
+    /* modal fullscreen */
+    #imageModal {
+      display: none;
+    }
+    #imageModal.active {
+      display: flex;
+    }
+
+    @media (max-width: 640px) {
+      .container-mobile { margin: 1rem; padding: 1rem; }
+      #modalImage { max-height: 80vh; max-width: 95vw; }
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-gradient-to-r from-green-400 via-blue-400 to-purple-500 p-4">
+  <div class="text-center text-white container-mobile bg-white/20 rounded-2xl shadow-xl backdrop-blur-sm w-full max-w-5xl mx-auto p-6 sm:p-8">
+    <h1 class="text-2xl sm:text-3xl font-bold mb-6 drop-shadow-lg">Semangaatt yaa Navii</h1>
+    <p class="text-base sm:text-lg mb-6">ojo gamon aee, omongono pisan ndek kembaran mu aku minta nomer e 🙃</p>
+
+    <!-- Grid foto -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+      <img src="images/foto1.jpg" alt="Foto 1" class="fade-in scrap-photo rounded-lg shadow-lg object-cover w-full h-40 sm:h-48">
+      <img src="images/foto2.jpg" alt="Foto 2" class="fade-in scrap-photo rounded-lg shadow-lg object-cover w-full h-40 sm:h-48">
+      <img src="images/foto3.jpg" alt="Foto 3" class="fade-in scrap-photo rounded-lg shadow-lg object-cover w-full h-40 sm:h-48">
+      <img src="images/foto4.jpg" alt="Foto 4" class="fade-in scrap-photo rounded-lg shadow-lg object-cover w-full h-40 sm:h-48">
+      <img src="images/foto5.jpg" alt="Foto 5" class="fade-in scrap-photo rounded-lg shadow-lg object-cover w-full h-40 sm:h-48">
+      <img src="images/foto6.jpg" alt="Foto 6" class="fade-in scrap-photo rounded-lg shadow-lg object-cover w-full h-40 sm:h-48">
+      <img src="images/foto7.jpg" alt="Foto 7" class="fade-in scrap-photo rounded-lg shadow-lg object-cover w-full h-40 sm:h-48">
+      <img src="images/foto8.jpg" alt="Foto 8" class="fade-in scrap-photo rounded-lg shadow-lg object-cover w-full h-40 sm:h-48">
+      <img src="images/foto9.jpg" alt="Foto 9" class="fade-in scrap-photo rounded-lg shadow-lg object-cover w-full h-40 sm:h-48">
+      <img src="images/foto10.jpg" alt="Foto 10" class="fade-in scrap-photo rounded-lg shadow-lg object-cover w-full h-40 sm:h-48">
+      <img src="images/foto11.jpg" alt="Foto 11" class="fade-in scrap-photo rounded-lg shadow-lg object-cover w-full h-40 sm:h-48">
+      
+    </div>
+
+    <!-- Tombol balik -->
+    <div class="mt-8">
+      <a href="index.html" class="inline-block px-6 py-3 bg-pink-600 hover:bg-pink-700 rounded-lg shadow font-semibold text-base sm:text-lg transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-pink-400 active:scale-95">
+        Balik Lagi
+      </a>
+    </div>
+  </div>
+
+  <!-- Modal untuk fullscreen foto -->
+  <div id="imageModal" class="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50">
+    <img id="modalImage" src="" alt="Preview Foto" class="max-h-[90vh] max-w-[90vw] rounded-lg shadow-2xl">
+    <button id="closeModal" class="absolute top-4 right-4 text-white text-3xl font-bold">&times;</button>
+  </div>
+
+  <script>
+    const photos = document.querySelectorAll('.scrap-photo');
+    const modal = document.getElementById('imageModal');
+    const modalImg = document.getElementById('modalImage');
+    const closeModal = document.getElementById('closeModal');
+
+    photos.forEach(photo => {
+      photo.addEventListener('click', () => {
+        modal.classList.add('active');
+        modalImg.src = photo.src;
+      });
+    });
+
+    closeModal.addEventListener('click', () => {
+      modal.classList.remove('active');
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) modal.classList.remove('active');
+    });
+  </script>
+</body>
+</html>
